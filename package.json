@@ -1,0 +1,18 @@
+{
+  "name": "base-template-v1",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "check:tools": "node scripts/check-tools.mjs",
+    "playwright:install": "playwright install chromium"
+  },
+  "dependencies": {
+    "@composio/core": "0.30.0",
+    "@mendable/firecrawl-js": "4.54.0",
+    "@perplexity-ai/mcp-server": "1.3.0",
+    "firecrawl-mcp": "3.40.0",
+    "@playwright/mcp": "0.0.85",
+    "playwright": "1.63.0"
+  }
+}
