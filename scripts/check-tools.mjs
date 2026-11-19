@@ -1,6 +1,7 @@
 // Vérifie que les clés sont présentes et que chaque outil répond.
 // Usage : set -a; source .env; set +a; npm run check:tools
 import { chromium } from "playwright";
+import { execFileSync } from "node:child_process";
 
 const results = [];
 const check = async (name, fn) => {
@@ -10,6 +11,7 @@ const check = async (name, fn) => {
     results.push([name, "ÉCHEC", e.message]);
   }
 };
+const run = (cmd, args) => execFileSync(cmd, args, { encoding: "utf8" }).trim().split("\n")[0];
 const need = (v) => {
   if (!process.env[v]) throw new Error(`${v} non défini`);
   return process.env[v];
@@ -47,6 +49,12 @@ await check("Composio", async () => {
   const toolkits = await composio.toolkits.get({});
   return `${toolkits.length ?? toolkits.items?.length ?? "?"} toolkits visibles`;
 });
+
+await check("FFmpeg", async () => run("ffmpeg", ["-version"]));
+await check("yt-dlp", async () => `version ${run("yt-dlp", ["--version"])}`);
+await check("Whisper", async () =>
+  `faster-whisper ${run("python3", ["-c", "import faster_whisper as f; print(f.__version__)"])}`);
+await check("HyperFrames", async () => `version ${run("npx", ["--no-install", "hyperframes", "--version"])}`);
 
 for (const [n, s, d] of results) console.log(`${s === "OK" ? "✔" : "✘"} ${n.padEnd(11)} ${s.padEnd(6)} ${d}`);
 process.exit(results.some((r) => r[1] !== "OK") ? 1 : 0);
