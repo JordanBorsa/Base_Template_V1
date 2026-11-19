@@ -45,8 +45,8 @@ claude
 Au premier lancement, Claude Code demande d'approuver les serveurs du projet. Vérifiez ensuite avec `/mcp` (ou `claude mcp list`).
 
 **Claude Code sur le web (cloud)** : n'utilisez pas `.env`. Ajoutez les clés comme secrets de l'environnement et autorisez les hôtes `api.perplexity.ai`, `api.firecrawl.dev` et `connect.composio.dev` dans les réglages réseau de l'environnement.
-Pour Whisper (modèles) : `huggingface.co` et ses CDN (`cdn-lfs.huggingface.co`, `cdn-lfs.hf.co`, `cas-bridge.xethub.hf.co`, `transfer.xethub.hf.co`).
-Pour yt-dlp sur YouTube : `www.youtube.com` **et** `*.googlevideo.com` (joker, à ajouter dans les réglages) ou un accès réseau complet.
+Pour Whisper (modèles) : `huggingface.co`, `us.aws.cdn.hf.co`, `cas-server.xethub.hf.co`, `cas-bridge.xethub.hf.co`, `transfer.xethub.hf.co`, `cdn-lfs.hf.co`, `cdn-lfs.huggingface.co`.
+Pour yt-dlp sur YouTube : `www.youtube.com` **et** `*.googlevideo.com` (joker, à ajouter dans les réglages). Depuis un serveur cloud, YouTube exige souvent une connexion (« Sign in to confirm you’re not a bot ») : passez vos cookies avec `yt-dlp --cookies cookies.txt …`.
 
 ## Vérification
 
